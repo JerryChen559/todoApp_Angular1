@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <title>Todo App</title>
+  </head>
+
+  <body>
+    <h1>Todo App</h1>
+
+    <div ng-controller="TodoCtrl as tCtrl">
+      <!-- textbox and button to add todos -->
+      <p>Add a Todo:</p>
+      <input type="text" ng-model="tCtrl.newTodo" />
+      <button ng-click="tCtrl.addNewTodo()">Add</button>
+
+      <!-- display todos list -->
+      <p>My Todos:</p>
+      <button ng-hide="tCtrl.editMode" ng-click="tCtrl.toggleEditMode()">
+        Edit
+      </button>
+      <button ng-show="tCtrl.editMode" ng-click="tCtrl.toggleEditMode()">
+        Finished Editing
+      </button>
+      <ol>
+        <li ng-repeat="el in tCtrl.todos track by $index">
+          <span ng-hide="tCtrl.editMode"
+            >{{ el }}
+            <button ng-click="tCtrl.removeTodo($index)">X</button></span
+          >
+          <input ng-show="tCtrl.editMode" type="text" ng-model="el" />
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
